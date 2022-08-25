@@ -18,6 +18,7 @@ public class TicTacToeGame {
 		gameObj.choosePlayerLetter();
 		gameObj.showBoard();
 		gameObj.playerPlays();
+		gameObj.showBoard();
 	}
 	
 	void initialiseGame(){
