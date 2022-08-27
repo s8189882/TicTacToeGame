@@ -48,7 +48,7 @@ public class TicTacToeGame {
 		}
 		else if (playerInput == 'O' || playerInput == 'o') {
 			playerLetter = 'O';
-			computerLetter = 'o';
+			computerLetter = 'X';
 		}
 		else {
 			System.out.println("\nInvalid Input.\nPlease try again!");
@@ -154,7 +154,7 @@ public class TicTacToeGame {
 		if (turn <= 2) 
 			generateRandomMove();
 		else 
-			generateSpecificMove();
+			generateWinningMove();
 		turn++;
 	}
 	
@@ -166,61 +166,171 @@ public class TicTacToeGame {
 			generateRandomMove();
 	}
 	
-	void generateSpecificMove() {
-		if(gameBoard[1] == computerLetter && gameBoard[2] == computerLetter)
+	void generateWinningMove() {
+		boolean madeMove = false;
+		if(gameBoard[1] == computerLetter && gameBoard[2] == computerLetter && gameBoard[3] == ' ') {
 			gameBoard[3] = computerLetter;
-		else if(gameBoard[2] == computerLetter && gameBoard[3] == computerLetter)
+			madeMove = true;
+		}
+		else if(gameBoard[2] == computerLetter && gameBoard[3] == computerLetter && gameBoard[1] == ' ') {
 			gameBoard[1] = computerLetter;
-		else if(gameBoard[1] == computerLetter && gameBoard[3] == computerLetter)
+			madeMove = true;
+		}
+		else if(gameBoard[1] == computerLetter && gameBoard[3] == computerLetter && gameBoard[2] == ' ') {
+			gameBoard[2] = computerLetter;
+			madeMove = true;
+		}
+		
+		else if(gameBoard[4] == computerLetter && gameBoard[5] == computerLetter && gameBoard[6] == ' ') {
+			gameBoard[6] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[5] == computerLetter && gameBoard[6] == computerLetter && gameBoard[4] == ' ') {
+			gameBoard[4] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[4] == computerLetter && gameBoard[6] == computerLetter && gameBoard[5] == ' ') {
+			gameBoard[5] = computerLetter;
+			madeMove = true;
+		}
+		
+		else if(gameBoard[7] == computerLetter && gameBoard[8] == computerLetter && gameBoard[9] == ' ') {
+			gameBoard[9] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[8] == computerLetter && gameBoard[9] == computerLetter && gameBoard[7] == ' ') {
+			gameBoard[7] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[7] == computerLetter && gameBoard[9] == computerLetter && gameBoard[8] == ' ') {
+			gameBoard[8] = computerLetter;
+			madeMove = true;
+		}
+		
+		else if(gameBoard[1] == computerLetter && gameBoard[4] == computerLetter && gameBoard[7] == ' ') {
+			gameBoard[7] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[4] == computerLetter && gameBoard[7] == computerLetter && gameBoard[1] == ' ') {
+			gameBoard[1] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[1] == computerLetter && gameBoard[7] == computerLetter && gameBoard[4] == ' ') {
+			gameBoard[4] = computerLetter;
+			madeMove = true;
+		}
+		
+		else if(gameBoard[2] == computerLetter && gameBoard[5] == computerLetter && gameBoard[8] == ' ') {
+			gameBoard[8] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[5] == computerLetter && gameBoard[8] == computerLetter && gameBoard[2] == ' ') {
+			gameBoard[2] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[2] == computerLetter && gameBoard[8] == computerLetter && gameBoard[5] == ' ') {
+			gameBoard[5] = computerLetter;
+			madeMove = true;
+		}
+		
+		else if(gameBoard[3] == computerLetter && gameBoard[6] == computerLetter && gameBoard[9] == ' ') {
+			gameBoard[9] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[6] == computerLetter && gameBoard[9] == computerLetter && gameBoard[3] == ' ') {
+			gameBoard[3] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[3] == computerLetter && gameBoard[9] == computerLetter && gameBoard[6] == ' ') {
+			gameBoard[6] = computerLetter;
+			madeMove = true;
+		}
+		
+		else if(gameBoard[1] == computerLetter && gameBoard[5] == computerLetter && gameBoard[9] == ' ') {
+			gameBoard[9] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[5] == computerLetter && gameBoard[9] == computerLetter && gameBoard[1] == ' ') {
+			gameBoard[1] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[1] == computerLetter && gameBoard[9] == computerLetter && gameBoard[5] == ' ') {
+			gameBoard[5] = computerLetter;
+			madeMove = true;
+		}
+		
+		else if(gameBoard[3] == computerLetter && gameBoard[5] == computerLetter && gameBoard[7] == ' ') {
+			gameBoard[7] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[5] == computerLetter && gameBoard[7] == computerLetter && gameBoard[3] == ' ') {
+			gameBoard[3] = computerLetter;
+			madeMove = true;
+		}
+		else if(gameBoard[3] == computerLetter && gameBoard[7] == computerLetter && gameBoard[5] == ' ') {
+			gameBoard[5] = computerLetter;
+			madeMove = true;
+		}
+		
+		if (madeMove == false)
+			blockPlayersMove();
+	}
+	
+	void blockPlayersMove() {
+		if(gameBoard[1] == playerLetter && gameBoard[2] == playerLetter && gameBoard[3] == ' ')
+			gameBoard[3] = computerLetter;
+		else if(gameBoard[2] == playerLetter && gameBoard[3] == playerLetter && gameBoard[1] == ' ')
+			gameBoard[1] = computerLetter;
+		else if(gameBoard[1] == playerLetter && gameBoard[3] == playerLetter && gameBoard[2] == ' ')
 			gameBoard[2] = computerLetter;
 		
-		else if(gameBoard[4] == computerLetter && gameBoard[5] == computerLetter)
+		else if(gameBoard[4] == playerLetter && gameBoard[5] == playerLetter && gameBoard[6] == ' ')
 			gameBoard[6] = computerLetter;
-		else if(gameBoard[5] == computerLetter && gameBoard[6] == computerLetter)
+		else if(gameBoard[5] == playerLetter && gameBoard[6] == playerLetter && gameBoard[4] == ' ')
 			gameBoard[4] = computerLetter;
-		else if(gameBoard[4] == computerLetter && gameBoard[6] == computerLetter)
+		else if(gameBoard[4] == playerLetter && gameBoard[6] == playerLetter && gameBoard[5] == ' ')
 			gameBoard[5] = computerLetter;
 		
-		else if(gameBoard[7] == computerLetter && gameBoard[8] == computerLetter)
+		else if(gameBoard[7] == playerLetter && gameBoard[8] == playerLetter && gameBoard[9] == ' ')
 			gameBoard[9] = computerLetter;
-		else if(gameBoard[8] == computerLetter && gameBoard[9] == computerLetter)
+		else if(gameBoard[8] == playerLetter && gameBoard[9] == playerLetter && gameBoard[7] == ' ')
 			gameBoard[7] = computerLetter;
-		else if(gameBoard[7] == computerLetter && gameBoard[9] == computerLetter)
+		else if(gameBoard[7] == playerLetter && gameBoard[9] == playerLetter && gameBoard[8] == ' ')
 			gameBoard[8] = computerLetter;
 		
-		else if(gameBoard[1] == computerLetter && gameBoard[4] == computerLetter)
+		else if(gameBoard[1] == playerLetter && gameBoard[4] == playerLetter && gameBoard[7] == ' ')
 			gameBoard[7] = computerLetter;
-		else if(gameBoard[4] == computerLetter && gameBoard[7] == computerLetter)
+		else if(gameBoard[4] == playerLetter && gameBoard[7] == playerLetter && gameBoard[1] == ' ')
 			gameBoard[1] = computerLetter;
-		else if(gameBoard[1] == computerLetter && gameBoard[7] == computerLetter)
+		else if(gameBoard[1] == playerLetter && gameBoard[7] == playerLetter && gameBoard[4] == ' ')
 			gameBoard[4] = computerLetter;
 		
-		else if(gameBoard[2] == computerLetter && gameBoard[5] == computerLetter)
+		else if(gameBoard[2] == playerLetter && gameBoard[5] == playerLetter && gameBoard[8] == ' ')
 			gameBoard[8] = computerLetter;
-		else if(gameBoard[5] == computerLetter && gameBoard[8] == computerLetter)
+		else if(gameBoard[5] == playerLetter && gameBoard[8] == playerLetter && gameBoard[2] == ' ')
 			gameBoard[2] = computerLetter;
-		else if(gameBoard[2] == computerLetter && gameBoard[8] == computerLetter)
+		else if(gameBoard[2] == playerLetter && gameBoard[8] == playerLetter && gameBoard[5] == ' ')
 			gameBoard[5] = computerLetter;
 		
-		else if(gameBoard[3] == computerLetter && gameBoard[6] == computerLetter)
+		else if(gameBoard[3] == playerLetter && gameBoard[6] == playerLetter && gameBoard[9] == ' ')
 			gameBoard[9] = computerLetter;
-		else if(gameBoard[6] == computerLetter && gameBoard[9] == computerLetter)
+		else if(gameBoard[6] == playerLetter && gameBoard[9] == playerLetter && gameBoard[3] == ' ')
 			gameBoard[3] = computerLetter;
-		else if(gameBoard[3] == computerLetter && gameBoard[9] == computerLetter)
+		else if(gameBoard[3] == playerLetter && gameBoard[9] == playerLetter && gameBoard[6] == ' ')
 			gameBoard[6] = computerLetter;
 		
-		else if(gameBoard[1] == computerLetter && gameBoard[5] == computerLetter)
+		else if(gameBoard[1] == playerLetter && gameBoard[5] == playerLetter && gameBoard[9] == ' ')
 			gameBoard[9] = computerLetter;
-		else if(gameBoard[5] == computerLetter && gameBoard[9] == computerLetter)
+		else if(gameBoard[5] == playerLetter && gameBoard[9] == playerLetter && gameBoard[1] == ' ')
 			gameBoard[1] = computerLetter;
-		else if(gameBoard[1] == computerLetter && gameBoard[9] == computerLetter)
+		else if(gameBoard[1] == playerLetter && gameBoard[9] == playerLetter && gameBoard[5] == ' ')
 			gameBoard[5] = computerLetter;
 		
-		else if(gameBoard[3] == computerLetter && gameBoard[5] == computerLetter)
+		else if(gameBoard[3] == playerLetter && gameBoard[5] == playerLetter && gameBoard[7] == ' ')
 			gameBoard[7] = computerLetter;
-		else if(gameBoard[5] == computerLetter && gameBoard[7] == computerLetter)
+		else if(gameBoard[5] == playerLetter && gameBoard[7] == playerLetter && gameBoard[3] == ' ')
 			gameBoard[3] = computerLetter;
-		else if(gameBoard[3] == computerLetter && gameBoard[7] == computerLetter)
+		else if(gameBoard[3] == playerLetter && gameBoard[7] == playerLetter && gameBoard[5] == ' ')
 			gameBoard[5] = computerLetter;
 	}
 }
