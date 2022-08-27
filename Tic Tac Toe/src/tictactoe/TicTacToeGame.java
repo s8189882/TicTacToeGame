@@ -8,6 +8,7 @@ public class TicTacToeGame {
 	char computerLetter = '\0';
 	String winner = null;
 	int turn = 0;
+	int firstPlayer = 0;
 	static Scanner sc = new Scanner(System.in);
 
 
@@ -16,24 +17,16 @@ public class TicTacToeGame {
 		System.out.println("In this program you will compete to win in a Tic Tac Toe game against the Computer.\n");
 		
 		TicTacToeGame gameObj = new TicTacToeGame();
-		gameObj.initialiseGame();
-		if (gameObj.toss() == 1)
-			System.out.println("\nPlayer won the toss.\nPlayer plays first.");
-		else
-			System.out.println("\nComputer won the toss.\nComputer plays first.");
-		gameObj.choosePlayerLetter();
-		gameObj.showBoard();
-		gameObj.playerPlays();
-		gameObj.showBoard();
-		gameObj.checkWinOrTie();
-		gameObj.computerPlays();
+		
+		gameObj.startGame();
+		gameObj.continueTillGameOver();	
 	}
 	
 	void initialiseGame(){
 		gameBoard = new char[10];
 		for(int index = 0; index < 10; index++)
 			gameBoard[index] = ' ';
-		turn = 0;
+		turn = 1;
 		winner = null;
 	}	
 	
@@ -68,7 +61,7 @@ public class TicTacToeGame {
 	}
 	
 	void playerPlays() {
-		System.out.print("\nEnter an empty cell number [1-9] where do want make your move : ");
+		System.out.print("\nPLAYER's Move\nEnter an empty cell number [1-9] where do want make your move : ");
 		byte playerCell = sc.nextByte();
 		if (playerCell > 9 || playerCell < 1) {
 			System.out.println("\nInvalid selection.\nPlease try again!");
@@ -151,11 +144,11 @@ public class TicTacToeGame {
 	}	
 	
 	void computerPlays() {
+		System.out.println("\nCOMPUTER's Move");
 		if (turn <= 2) 
 			generateRandomMove();
 		else 
 			generateWinningMove();
-		turn++;
 	}
 	
 	void generateRandomMove() {
@@ -330,5 +323,49 @@ public class TicTacToeGame {
 			gameBoard[2] = computerLetter;	
 		else if(gameBoard[3] == playerLetter && gameBoard[9] == playerLetter && gameBoard[6] == ' ')
 			gameBoard[6] = computerLetter;
+	}
+	
+	void playersTurn() {
+		playerPlays();
+		showBoard();
+		checkWinOrTie();
+	}
+	
+	void computersTurn(){
+		computerPlays();
+		showBoard();
+		checkWinOrTie();
+	}
+	
+	void startGame() {
+		firstPlayer = toss();
+		initialiseGame();
+		choosePlayerLetter();
+		if (firstPlayer == 1)
+			System.out.println("\nPlayer won the toss.\nPlayer plays first.");
+		else
+			System.out.println("\nComputer won the toss.\nComputer plays first.");
+		showBoard();
+	}
+	
+	void continueTillGameOver() {
+		while(winner == null) {
+			if(firstPlayer == 1) {
+				playersTurn();
+				if(winner != null)
+					break;
+				else
+					computersTurn();
+			}
+			else
+			{
+				computersTurn();
+				if(winner != null)
+					break;
+				else
+					playersTurn();
+			}	
+			turn++;
+		}
 	}
 }
