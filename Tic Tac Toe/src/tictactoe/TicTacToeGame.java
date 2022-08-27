@@ -9,6 +9,7 @@ public class TicTacToeGame {
 	String winner = null;
 	int turn = 0;
 	int firstPlayer = 0;
+	boolean nextGame = true;
 	static Scanner sc = new Scanner(System.in);
 
 
@@ -18,8 +19,10 @@ public class TicTacToeGame {
 		
 		TicTacToeGame gameObj = new TicTacToeGame();
 		
-		gameObj.startGame();
-		gameObj.continueTillGameOver();	
+		while(gameObj.nextGame) {
+			gameObj.playGame();
+			gameObj.playAnotherGame();
+		}
 	}
 	
 	void initialiseGame(){
@@ -366,6 +369,29 @@ public class TicTacToeGame {
 					playersTurn();
 			}	
 			turn++;
+		}
+	}
+	
+	void playGame() {
+		startGame();
+		continueTillGameOver();
+	}
+	
+	void playAnotherGame() {
+		System.out.println("\n\n\nDo you want to play another game?");
+		System.out.println("Enter 'Yes' to continue.");
+		System.out.println("Enter 'No' to exit.");
+		char playerInput = sc.next().charAt(0);
+		if (playerInput == 'Y' || playerInput == 'y') {
+			nextGame = true;
+		}
+		else if (playerInput == 'N' || playerInput == 'n') {
+			nextGame = false;
+			System.out.println("\n\nThank you for playing!");
+		}
+		else {
+			System.out.println("\nInvalid Input.\nPlease try again!");
+			playAnotherGame();
 		}
 	}
 }
