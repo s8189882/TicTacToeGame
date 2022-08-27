@@ -7,6 +7,7 @@ public class TicTacToeGame {
 	char playerLetter = '\0';
 	char computerLetter = '\0';
 	String winner = null;
+	int turn = 0;
 	static Scanner sc = new Scanner(System.in);
 
 
@@ -25,12 +26,15 @@ public class TicTacToeGame {
 		gameObj.playerPlays();
 		gameObj.showBoard();
 		gameObj.checkWinOrTie();
+		gameObj.computerPlays();
 	}
 	
 	void initialiseGame(){
 		gameBoard = new char[10];
 		for(int index = 0; index < 10; index++)
 			gameBoard[index] = ' ';
+		turn = 0;
+		winner = null;
 	}	
 	
 	void choosePlayerLetter() {
@@ -123,7 +127,6 @@ public class TicTacToeGame {
 					break;
 			}
 		}
-			winner = "me";
 		if (winLetter == playerLetter)
 			winner = "PLAYER";
 		else if(winLetter == computerLetter)
@@ -146,4 +149,78 @@ public class TicTacToeGame {
 		else 
 			System.out.println("\n\n"+winner+" wins!");
 	}	
+	
+	void computerPlays() {
+		if (turn <= 2) 
+			generateRandomMove();
+		else 
+			generateSpecificMove();
+		turn++;
+	}
+	
+	void generateRandomMove() {
+		int position = (int)(Math.random()*9)+1;
+		if (gameBoard[position] == ' ')
+			gameBoard[position] = computerLetter;
+		else
+			generateRandomMove();
+	}
+	
+	void generateSpecificMove() {
+		if(gameBoard[1] == computerLetter && gameBoard[2] == computerLetter)
+			gameBoard[3] = computerLetter;
+		else if(gameBoard[2] == computerLetter && gameBoard[3] == computerLetter)
+			gameBoard[1] = computerLetter;
+		else if(gameBoard[1] == computerLetter && gameBoard[3] == computerLetter)
+			gameBoard[2] = computerLetter;
+		
+		else if(gameBoard[4] == computerLetter && gameBoard[5] == computerLetter)
+			gameBoard[6] = computerLetter;
+		else if(gameBoard[5] == computerLetter && gameBoard[6] == computerLetter)
+			gameBoard[4] = computerLetter;
+		else if(gameBoard[4] == computerLetter && gameBoard[6] == computerLetter)
+			gameBoard[5] = computerLetter;
+		
+		else if(gameBoard[7] == computerLetter && gameBoard[8] == computerLetter)
+			gameBoard[9] = computerLetter;
+		else if(gameBoard[8] == computerLetter && gameBoard[9] == computerLetter)
+			gameBoard[7] = computerLetter;
+		else if(gameBoard[7] == computerLetter && gameBoard[9] == computerLetter)
+			gameBoard[8] = computerLetter;
+		
+		else if(gameBoard[1] == computerLetter && gameBoard[4] == computerLetter)
+			gameBoard[7] = computerLetter;
+		else if(gameBoard[4] == computerLetter && gameBoard[7] == computerLetter)
+			gameBoard[1] = computerLetter;
+		else if(gameBoard[1] == computerLetter && gameBoard[7] == computerLetter)
+			gameBoard[4] = computerLetter;
+		
+		else if(gameBoard[2] == computerLetter && gameBoard[5] == computerLetter)
+			gameBoard[8] = computerLetter;
+		else if(gameBoard[5] == computerLetter && gameBoard[8] == computerLetter)
+			gameBoard[2] = computerLetter;
+		else if(gameBoard[2] == computerLetter && gameBoard[8] == computerLetter)
+			gameBoard[5] = computerLetter;
+		
+		else if(gameBoard[3] == computerLetter && gameBoard[6] == computerLetter)
+			gameBoard[9] = computerLetter;
+		else if(gameBoard[6] == computerLetter && gameBoard[9] == computerLetter)
+			gameBoard[3] = computerLetter;
+		else if(gameBoard[3] == computerLetter && gameBoard[9] == computerLetter)
+			gameBoard[6] = computerLetter;
+		
+		else if(gameBoard[1] == computerLetter && gameBoard[5] == computerLetter)
+			gameBoard[9] = computerLetter;
+		else if(gameBoard[5] == computerLetter && gameBoard[9] == computerLetter)
+			gameBoard[1] = computerLetter;
+		else if(gameBoard[1] == computerLetter && gameBoard[9] == computerLetter)
+			gameBoard[5] = computerLetter;
+		
+		else if(gameBoard[3] == computerLetter && gameBoard[5] == computerLetter)
+			gameBoard[7] = computerLetter;
+		else if(gameBoard[5] == computerLetter && gameBoard[7] == computerLetter)
+			gameBoard[3] = computerLetter;
+		else if(gameBoard[3] == computerLetter && gameBoard[7] == computerLetter)
+			gameBoard[5] = computerLetter;
+	}
 }
